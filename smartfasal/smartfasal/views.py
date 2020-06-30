@@ -27,6 +27,8 @@ class FTP_session_view:
         return render(request,'visualise.html')
 ######################################################################################################
     def jslearning(request):
+
+        ######### Phase 1:- Data aloocating and defining
         import plotly.graph_objects as go
         import numpy as np
 
@@ -38,12 +40,17 @@ class FTP_session_view:
         line_size = [2, 2, 2, 2, 2, 2, 2]
 
         x_data = np.vstack((np.arange(0, 23 ),)*7)
+        ########### data allocation phase completed.
 
+        ########### phase :: Accessing the downloaded file (Data1.csv)
+        import os
+        from smartfasal_project.settings import BASE_DIR
+        STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+        path = STATIC_ROOT
+        os.chdir(path)
         import pandas as pd
-
-        filename = "D:/CSIR_Smart_Fasal/cODE/DJango and Heroku/Django, HTML/smartfasal/static/data1.csv"
-
-        Local_data_smartfasal = pd.read_csv(filename, names=['Timestamp', 'S_M_10cm','S_M_45cm','S_M_80cm', 'Temperature', 'Humidity', 'Pressure', 'Luxes', 'Battery','Readings'])
+        filename = "data1.csv"
+        Local_data_smartfasal = pd.read_csv(filename, names=['Timestamp', 'S_M_10cm','S_M_45cm','S_M_80cm', 'Temperature', 'Humidity', 'Pressure', 'Luxes'])
 
         y_data = np.array([
                           Local_data_smartfasal['S_M_10cm'],
@@ -55,6 +62,9 @@ class FTP_session_view:
                           Local_data_smartfasal['Luxes'],
                           ])
 
+        ################ Data loading Phase completed
+
+        ############### Phase 3:- Data plotting
         fig = go.Figure()
 
         for i in range(0, 7):
@@ -71,6 +81,11 @@ class FTP_session_view:
                 mode='markers',
                 marker=dict(color=colors[i], size=mode_size[i])
             ))
+
+
+        ############## Data plotting phase completed
+
+        ############ phase 5:- FIgure layout phase
 
         fig.update_layout(
             xaxis=dict(
@@ -103,6 +118,9 @@ class FTP_session_view:
             plot_bgcolor='white'
         )
 
+########### layout phase completed
+
+### Phase 6:- Anotation phase
         annotations = []
 
         # Adding labels
@@ -141,10 +159,8 @@ class FTP_session_view:
         fig.update_layout(annotations=annotations)
 
         fig.show()
-
+### Anmotation phase completed. 
 ##########################################################################################################
-
-
 
 
 
