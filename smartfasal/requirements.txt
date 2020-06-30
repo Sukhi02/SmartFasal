@@ -1,0 +1,6 @@
+Django
+gunicorn
+postgres
+whitenoise
+matplotlib
+pandas
