@@ -23,9 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('index', views.FTP_session_view.index, name = 'index'), ## INDEX PAGE
     path('visualise', views.FTP_session_view.visual, name = 'visualise'), ## PLOTS PAGE
-        path('ftp_login', views.FTP_session_view.ftp_login, name = 'ftp_login'), ## FTP PAGE
+    path('ftp_login', views.Plots.ftp_login, name = 'ftp_login'), ## FTP PAGE
         #path('plots/', views.FTP_session_view.make_plots, name = 'plots'), ## plots PAGE
-        path('visualising', views.FTP_session_view.visualising, name = 'visualising'), ## PLOTS PAGE
-        path('jslearning', views.FTP_session_view.jslearning, name = 'jslearning'), ## JSlearning PAGE
+    path('real_plot', views.Plots.real_plot, name = 'real_plot'), ## FTP PAGE
+    path('visualising', views.visualising, name = 'visualising'), ## PLOTS PAGE
+
 
 ]
